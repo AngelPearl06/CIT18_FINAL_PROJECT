@@ -1,16 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\DessertController;
+use App\Http\Controllers\DessertsController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/dessert', DessertController::class);
+Route::resource('/desserts', DessertsController::class);
 
-Route::middleware('auth')->group(function () {
-    Route::resource('categories', CategoryController::class);
-    Route::resource('desserts', DessertController::class);
-});

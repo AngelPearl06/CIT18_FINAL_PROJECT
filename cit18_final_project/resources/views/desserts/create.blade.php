@@ -1,13 +1,13 @@
+<!-- resources/views/desserts/create.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <title>Create Dessert</title>
+    <title>Create desserts Item</title>
 </head>
-
 <body>
-    <h1>Create a New Dessert</h1>
+    <h1>Create a New desserts Item</h1>
 
     <!-- Display validation errors if any -->
     @if ($errors->any())
@@ -20,33 +20,33 @@
         </div>
     @endif
 
-    <form method="POST" action="{{ route('dessert.store') }}">
+    <form method="POST" action="{{ str_replace(':8000', '', config('app.url')) . '/desserts' }}">
         @csrf
 
         <label for="name">Name:</label>
         <input type="text" name="name" value="{{ old('name') }}" required>
 
-        <label for="description">Description:</label>
-        <textarea name="description" required> {{ old('description') }}</textarea>
-
-        <label for="price">Price:</label>
-        <input type="number" name="price" value="{{ old('price') }}" required>
-
-        <!-- Category Selection -->
-        <label for="category_id">Category:</label>
-        <select name="category_id" required>
-            <option value="">Select Category</option>
-            <option value="1" {{ old('category_id') == 1 ? 'selected' : '' }}>Cake</option>
-            <option value="2" {{ old('category_id') == 2 ? 'selected' : '' }}>Pies</option>
-            <option value="3" {{ old('category_id') == 3 ? 'selected' : '' }}>Cookies</option>
-            <option value="4" {{ old('category_id') == 4 ? 'selected' : '' }}>Custards</option>
+        <label for="category">Category:</label>
+        <select name="category" required>
+            <option value="" disabled selected>Select</option>
+            <option value="Cakes" {{ old('category') == 'Cakes' ? 'selected' : '' }}>Cakes</option>
+            <option value="Pies" {{ old('category') == 'Pies' ? 'selected' : '' }}>Pies</option>
+            <option value="Cookies" {{ old('category') == 'Cookies' ? 'selected' : '' }}>Cookies</option>
+            <option value="Breads" {{ old('category') == 'Breads' ? 'selected' : '' }}>Breads</option>
         </select>
 
-        <button type="submit">Create Dessert</button>
+        <label for="description">Description:</label>
+        <textarea name="description">{{ old('description') }}</textarea>
+
+        <label for="quantity">Quantity:</label>
+        <input type="number" name="quantity" value="{{ old('quantity') }}" required>
+
+        <label for="price">Price:</label>
+        <input type="number" step="0.01" name="price" value="{{ old('price') }}" required>
+
+        <button type="submit">Create Item</button>
     </form>
 
-    <a href="{{ route('desserts.index') }}">Back to Menu</a>
-
+    <a href="{{ str_replace(':8000', '', config('app.url')) . '/desserts' }}">Back to desserts</a>
 </body>
-
 </html>
